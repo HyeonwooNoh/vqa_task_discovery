@@ -22,5 +22,25 @@ This script will create two files:
 * data/preprocessed/glove_vocab.json
 * data/preprocessed/glove.6B.300d.hdf5
 
+### Preprocessing Visual Genome
+#### Create image split for Visual Genome
+Training in visual genome requires training / validataion / testing to analyze learning dynamics.
+Use the following script to create splits.
+```bash
+# Run the scripts in data/
+python tools/visualgenome/construct_image_split.py
+```
+
+#### Reduce GloVe vocab based on occurrence in Visual Genome dataset
+We create reduced vocabulary based on word occurrences in visual genome dataset.
+```bash
+# Run the scripts in data/
+python tools/visualgenome/generator_objects.py --vocab_path preprocessed/glove_vocab.json
+python tools/visualgenome/generator_attributes.py --vocab_path preprocessed/glove_vocab.json
+python tools/visualgenome/generator_relationships.py --vocab_path preprocessed/glove_vocab.json
+python tools/visualgenome/generator_region_descriptions.py --vocab_path preprocessed/glove_vocab.json --max_description_length 10
+python tools/construct_frequent_vocab.py --min_occurrence 50
+```
+
 ## Useful scripts for dataset preparation
 We provide useful scripts for preparing datasets in [data/scripts](../data/scripts) directory.
