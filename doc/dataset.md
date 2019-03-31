@@ -11,13 +11,13 @@ This document describes required datasets and their configuration for running ex
 ## Initial path configurations
 - data/VisualGenome/VG\_100K/\*.jpg
 - data/VisualGenome/annotations/objects.json
+- data/VisualGenome/annotations/object_synsets.json
 - data/VisualGenome/annotations/attributes.json
+- data/VisualGenome/annotations/attribute_synsets.json
 - data/VisualGenome/annotations/relationships.json
+- data/VisualGenome/annotations/relationship_synsets.json
 - data/VisualGenome/annotations/region\_descriptions.json
-- data/VisualGenome/annotations/region\_graphs.json
-- data/VisualGenome/annotations/scene\_graphs.json
-- data/VisualGenome/annotations/object\_alias.txt
-- data/VisualGenome/annotations/relationship\_alias.txt
+- data/VisualGenome/annotations/image\_data.json
 - data/VisualGenome/bottomup_feature_36/image_info.json
 - data/VisualGenome/bottomup_feature_36/vfeat_bottomup_36.hdf5
 - data/GloVe/glove.6B.50d.txt
