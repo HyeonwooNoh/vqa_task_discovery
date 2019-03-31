@@ -1,0 +1,25 @@
+# Temporary files
+*.swp
+*.swo
+*.ropeproject
+*.pyc
+
+# Data files
+*.json
+*.hdf5
+*.ckpt
+*.pkl
+
+# Ipython notebook
+.ipynb_checkpoints
+*.ipynb
+
+# Data directories
+data/VisualGenome
+data/VQA_v2
+data/GloVe
+data/preprocessed
+
+# Temporary files
+temp_*
+dummy*
