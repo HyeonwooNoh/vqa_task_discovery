@@ -9,7 +9,7 @@ This document describes required datasets and their configuration for running ex
 * [Bottom-up-attention](https://github.com/peteanderson80/bottom-up-attention) feature for Visual Genome. We use official bottom-up-attention based feature extractor [tools/genenerate_tsv.py](https://github.com/peteanderson80/bottom-up-attention/blob/master/tools/generate_tsv.py) to extract the features from visual genome dataset. The preprocessed bottom-up-attention feature [??]() and image information file [??]() are available for download. Note that we preprocess bottom-up-attention feature with [???]() script.
 
 ## Initial path configurations
-Initial data path list is in [data/init_paths.txt](data/init_paths.txt)
+Initial data path list is in [data/init_paths.txt](../data/init_paths.txt)
 
 ## Useful scripts for dataset preparation
 We provide useful scripts for preparing datasets in [data/scripts](../data/scripts) directory.
