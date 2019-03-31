@@ -43,11 +43,3 @@ wget https://storage.googleapis.com/bottom-up-attention/test2015_36.zip
 unzip test2015_36.zip
 mv test2015_36 test2015
 cd ..
-
-mkdir bottom_up_attention_10_100
-cd bottom_up_attention_10_100
-wget https://storage.googleapis.com/bottom-up-attention/trainval.zip
-unzip trainval.zip
-wget https://storage.googleapis.com/bottom-up-attention/test2015.zip
-unzip test2015.zip
-cd ..
