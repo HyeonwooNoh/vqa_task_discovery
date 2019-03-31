@@ -11,5 +11,16 @@ This document describes required datasets and their configuration for running ex
 ## Initial path configurations
 Initial data path list is in [data/init_paths.txt](../data/init_paths.txt)
 
+## Preprocess data
+### Preprocessing GloVe 
+GloVe data is proprocessed to extract vocabulary list with special tokens for setence processing. For the preprocessing, use the following script in path ```data/```.
+```bash
+# Run the script in data/
+python tools/preprocess_glove.py
+```
+This script will create two files:
+* data/preprocessed/glove_vocab.json
+* data/preprocessed/glove.6B.300d.hdf5
+
 ## Useful scripts for dataset preparation
 We provide useful scripts for preparing datasets in [data/scripts](../data/scripts) directory.
