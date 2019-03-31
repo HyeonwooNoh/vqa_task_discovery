@@ -1,0 +1,12 @@
+tensorflow-gpu==1.6.0
+editdistance==0.4
+tqdm==4.19.5
+h5py==2.7.1
+Pillow==5.0.0
+colorlog==3.1.2
+matplotlib==2.1.2
+opencv-python==3.4.0.12
+ipython==5.5.0
+jupyter==1.0.0
+nltk==3.2.5
+ipdb==0.11
