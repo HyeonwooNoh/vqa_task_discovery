@@ -28,7 +28,8 @@ Because there are too many unnecessary vocabulary in GloVe, we reduce its size b
 The reduced vocabulary file can be downloaded in [[link](http://cvlab.postech.ac.kr/~hyeonwoonoh/research/vqa_task_discovery/new_vocab50.json)].
 Place this vocabulary in ```data/preprocessed/new_vocab50.json```
 
-##### How the smaller vocabulary file is constructed
+* *Download link for reduced vocabulary [[link](http://cvlab.postech.ac.kr/~hyeonwoonoh/research/vqa_task_discovery/new_vocab50.json)]*
+
 The smaller vocabulary file is constrctured with the following scripts. Note that the result might differ due to randomness in the script, but these scripts can be used to understand the procedure for reducing vocabulary.
 ```bash
 # Run the scripts in data/
