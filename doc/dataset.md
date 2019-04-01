@@ -39,7 +39,7 @@ python tools/visualgenome/generator_objects.py --vocab_path preprocessed/glove_v
 python tools/visualgenome/generator_attributes.py --vocab_path preprocessed/glove_vocab.json
 python tools/visualgenome/generator_relationships.py --vocab_path preprocessed/glove_vocab.json
 python tools/visualgenome/generator_region_descriptions.py --vocab_path preprocessed/glove_vocab.json --max_description_length 10
-python tools/construct_frequent_vocab.py --min_occurrence 50
+python tools/visualgenome/construct_frequent_vocab.py --min_word_occurrence 50
 ```
 
 ## Useful scripts for dataset preparation
