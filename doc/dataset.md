@@ -43,7 +43,29 @@ python tools/visualgenome/construct_frequent_vocab.py --min_word_occurrence 50
 
 #### Construct pretraining data
 
-Use following script to construct data for pretraining task conditional visual classifier.
+Download preprocessed data for pretraining task conditional visual classifier on visual genome dataset.
+
+* *Download link for preprocessed pretraining data [[link](http://cvlab.postech.ac.kr/~hyeonwoonoh/research/vqa_task_discovery/preprocessed/visualgenome/memft_all_new_vocab50_obj3000_attr1000_maxlen10.tar.gz)]*
+
+Extract the file in the following directory
+```bash
+data/preprocessed/visualgenome/memft_all_new_vocab50_obj3000_attr1000_maxlen10
+```
+The extracted directory should contain following files
+```bash
+vocab.pkl  # vocabulary containing all word occurring in a visual genome dataset (including descriptions)
+image_split.pkl  # [train, val] split containing list of image ids from visual genome dataset 
+answer_dict.pkl  # vocabulary of visual concepts, which are answers for learning task conditional visual classifier
+object_list.pkl  # names of objects (visual concept) that are used for pretraining
+attribute_list.pkl  # names of attributes (visual concept) that are used for pretraining
+train_processed.pkl  # preprocessed data including bounding boxes, visual concepts and blanked descriptions
+train_image_info.pkl  # dictionary from visual genome image id to index within training set (to look up extracted bottomup-attention features)
+val_processed.pkl  # preprocessed data including bounding boxes, visual concepts and blanked descriptions
+val_image_info.pkl  # dictionary from visual genome image id to index within training set (to look up extracted bottomup-attention features)
+image_id2processed.pkl  # all preprocessed information for visual genome image id
+```
+
+The preprocessed dataset is constructed by running the following script.
 ```bash
 # Run the script in root directory /
 python data/tools/visualgenome/generator_memft.py
