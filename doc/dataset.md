@@ -71,5 +71,16 @@ The preprocessed dataset is constructed by running the following script.
 python data/tools/visualgenome/generator_memft.py
 ```
 
+Our code preload all bottomup-attention features for whole dataset into ram to minimize overhead for reading feature from HDD or SDD. This approach increases the training speed significantly because reading a large features is the important bottleneck for the training speed.
+To support the preloading features, we should construct new feature files consisting of used images only. The following script will construct the new files.
+```bash
+python data/tools/visualgenome/sample_bottomup_vfeat_for_memft.py
+```
+The script will create two features for training set and validation set separately in the directory (memft_all_new_vocab50_obj3000_attr1000_maxlen10).
+```bash
+train_vfeat.hdf5  # visual features for visual genome training set
+val_vfeat.hdf5  # visual features for visual genome validation set
+```
+
 ## Useful scripts for dataset preparation
 We provide useful scripts for preparing datasets in [data/scripts](../data/scripts) directory.
