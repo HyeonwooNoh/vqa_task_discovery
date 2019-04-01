@@ -2,8 +2,8 @@
 
 ## Requirements
 * python2.7
-* NVIDIA GPU with at least ?? GB memory
-* At least ?? GB ram (for preloading all features into memory for faster learning)
+* NVIDIA GPU with at least 1.2 GB memory
+* At least 128 GB ram (for preloading all features into memory for faster learning)
 
 ### Setting with virtual environment
 
@@ -20,3 +20,6 @@ The python dependencies are installed by running the script
 ```bash
 pip install -r requirements.txt
 ```
+
+## Dataset preparation
+Instructures for preparing datasets for pretraining and transfer to VQA is described in [this document](doc/dataset.md).
