@@ -41,5 +41,13 @@ python tools/visualgenome/generator_region_descriptions.py --vocab_path preproce
 python tools/visualgenome/construct_frequent_vocab.py --min_word_occurrence 50
 ```
 
+#### Construct pretraining data
+
+Use following script to construct data for pretraining task conditional visual classifier.
+```bash
+# Run the script in root directory /
+python data/tools/visualgenome/generator_memft.py
+```
+
 ## Useful scripts for dataset preparation
 We provide useful scripts for preparing datasets in [data/scripts](../data/scripts) directory.
