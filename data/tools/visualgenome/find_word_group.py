@@ -1,12 +1,16 @@
 import argparse
 import cPickle
+import copy
 import json
 import os
+import numpy as np
 
 from collections import defaultdict
 from nltk.corpus import wordnet as wn
 from textblob import Word
 from tqdm import tqdm
+
+RANDOM_STATE = np.random.RandomState(123)
 
 
 def str2bool(v):
@@ -20,7 +24,8 @@ parser.add_argument('--dir_name', type=str,
                     default='data/preprocessed/visualgenome'
                     '/memft_all_new_vocab50_obj3000_attr1000_maxlen10', help=' ')
 parser.add_argument('--min_num_word', type=int, default=5, help='min num word in set')
-parser.add_argument('--expand_depth', type=str2bool, default=False, help='whether to expand wordset based on deepest depth')
+parser.add_argument('--expand_depth', type=str2bool, default=False,
+                    help='whether to use depth for wordset construction')
 config = parser.parse_args()
 
 config.object_synset_path = os.path.join(
@@ -121,6 +126,10 @@ for k, v_list in hypernym_wordset.items():
         v_idx = answer_dict['dict'][v]
         wordset_dict['ans2wordset'][v_idx].append(k_idx)
         wordset_dict['wordset2ans'][k_idx].add(v_idx)
+
+wordset_dict['ans2shuffled_wordset'] = copy.deepcopy(wordset_dict['ans2wordset'])
+for ans in wordset_dict['ans2shuffled_wordset']:
+    RANDOM_STATE.shuffle(wordset_dict['ans2shuffled_wordset'][ans])
 
 cPickle.dump(wordset_dict, open(config.save_wordset_path, 'wb'))
 print('wordset is saved in : {}'.format(config.save_wordset_path))
