@@ -2,6 +2,8 @@
 
 ## Requirements
 * python2.7
+* NVIDIA GPU with at least ?? GB memory
+* At least ?? GB ram (for preloading all features into memory for faster learning)
 
 ### Setting with virtual environment
 
