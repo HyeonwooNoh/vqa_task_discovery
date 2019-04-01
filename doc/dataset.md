@@ -11,8 +11,13 @@ This document describes required datasets and their configuration for running ex
 ## Initial path configurations
 Initial data path list is in [data/init_paths.txt](../data/init_paths.txt)
 
-## Preprocess data
-### Preprocessing GloVe 
+
+## Useful scripts for dataset preparation
+We provide useful scripts for downloading and configuring third-party datasets in [data/scripts](../data/scripts) directory.
+
+
+# Preprocess data
+## Preprocessing GloVe 
 GloVe data is proprocessed to extract vocabulary list with special tokens for setence processing. For the preprocessing, use the following script in path ```data/```.
 ```bash
 # Run the script in data/
@@ -22,8 +27,8 @@ This script will create two files:
 * data/preprocessed/glove_vocab.json
 * data/preprocessed/glove.6B.300d.hdf5
 
-### Preprocessing Visual Genome
-#### Smaller vocabulary based on occurrence in Visual Genome dataset
+## Preprocessing Visual Genome
+### Smaller vocabulary based on occurrence in Visual Genome dataset
 Because there are too many unnecessary vocabulary in GloVe, we reduce its size based on their occurrence in Visual Genome datasets.
 The reduced vocabulary file can be downloaded in [[link](http://cvlab.postech.ac.kr/~hyeonwoonoh/research/vqa_task_discovery/new_vocab50.json)].
 Place this vocabulary in ```data/preprocessed/new_vocab50.json```
@@ -41,8 +46,9 @@ python tools/visualgenome/generator_region_descriptions.py --vocab_path preproce
 python tools/visualgenome/construct_frequent_vocab.py --min_word_occurrence 50
 ```
 
-#### Construct pretraining data
+### Construct pretraining data
 
+#### Pretraining data split
 Download preprocessed data for pretraining task conditional visual classifier on visual genome dataset.
 
 * *Download link for preprocessed pretraining data [[link](http://cvlab.postech.ac.kr/~hyeonwoonoh/research/vqa_task_discovery/preprocessed/visualgenome/memft_all_new_vocab50_obj3000_attr1000_maxlen10.tar.gz)]*
@@ -71,6 +77,7 @@ The preprocessed dataset is constructed by running the following script.
 python data/tools/visualgenome/generator_memft.py
 ```
 
+#### Sampled bottomup-attention features
 Our code preload all bottomup-attention features for whole dataset into ram to minimize overhead for reading feature from HDD or SDD. This approach increases the training speed significantly because reading a large features is the important bottleneck for the training speed.
 To support the preloading features, we should construct new feature files consisting of used images only. The following script will construct the new files.
 ```bash
@@ -82,5 +89,10 @@ train_vfeat.hdf5  # visual features for visual genome training set
 val_vfeat.hdf5  # visual features for visual genome validation set
 ```
 
-## Useful scripts for dataset preparation
-We provide useful scripts for preparing datasets in [data/scripts](../data/scripts) directory.
+#### Word set extracted from WordNet 
+
+For unsupervised task discovery, WordNet should be preprocessed to create word sets that are used for sampling task specifications. Use the following script to preprocess WordNet
+```bash
+python data/tools/visualgenome/find_word_group.py --expand_depth=False
+```
+The script should create the ```wordset_dict5_depth0.pkl``` file in ```memft_all_new_vocab50_obj3000_attr1000_maxlen10``` directory.
