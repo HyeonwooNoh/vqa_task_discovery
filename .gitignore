@@ -20,6 +20,9 @@ data/VQA_v2
 data/GloVe
 data/preprocessed
 
+# Experimental results
+train_dir/*
+
 # Temporary files
 temp_*
 dummy*
