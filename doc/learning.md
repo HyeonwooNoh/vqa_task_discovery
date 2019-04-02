@@ -30,3 +30,12 @@ Following script will export word weight of proposed model with seed=234 after 4
 ```bash
 python pretrain/export_word_weights.py --checkpoint train_dir/proposed_expand_depth_bs512_lr0.001_dpFalse_seed234/model-4801
 ```
+### Training for VQA
+Use the following script for learning VQA model.
+```bash
+python vqa/trainer.py --model_type proposed --pretrained_param_path ${MODEL_PATH} --pretrain_word_weight_dir ${WORD_WEIGHT_DIR} --prefix ${TRAIN_DIR_NAME_PREFIX} --seed ${VQA_SEED}
+```
+Example script:
+```bash
+python vqa/trainer.py --model_type proposed --pretrained_param_path train_dir/proposed_expand_depth_bs512_lr0.001_dpFalse_seed234/model-4801 --pretrain_word_weight_dir train_dir/proposed_expand_depth_bs512_lr0.001_dpFalse_seed234/word_weights_model-4801 --prefix pretrainseed234 --seed 234
+```
