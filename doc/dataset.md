@@ -134,3 +134,16 @@ python data/tools/vqa_v2/make_qid2anno_trainval.py
 python data/tools/vqa_v2/make_pure_test_qid2anno.py  # Construct pure test set whose answers are not exposed to training set at all
 ```
 Note that we have separate *pure test set*, because VQA usually have 10 different answers for each questions and we need to ensure any of these answers was not exposed during training. The *pure test set* is used for the final evaluation.
+
+### Preprocessing for learning and evaluation
+The training script uses tf_record for loading annotations such as image id, bounding boxes and descriptions during while running the script, and uses separate visual feature file to preload all visual feature before running the script.
+The tf_record files are generated with the script
+```bash
+# Run the script in root directory /
+python data/tools/vqa_v2/generator_tf_record_memft_genome.py
+```
+To preload all visual features at once, following script is used for preprocessing bottomup-attention features.
+```bash
+# Run the script in root directory /
+python data/tools/vqa_v2/process_bottom_up_attention_36_memft_genome.py
+```
