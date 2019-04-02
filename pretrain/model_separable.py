@@ -138,34 +138,24 @@ class Model(object):
             activation_fn=tf.tanh, is_training=self.is_train, scope='wordset_ft')
 
         v_linear_l = modules.fc_layer(
-            pooled_V_ft, L_DIM, use_bias=True, use_bn=False, use_ln=True,
+            pooled_V_ft, L_DIM * 2, use_bias=True, use_bn=False, use_ln=True,
             activation_fn=tf.nn.relu, is_training=self.is_train,
             scope='pooled_linear_l')
+        v_linear_l = tf.nn.dropout(v_linear_l, 0.5)
 
         l_linear_l = modules.fc_layer(
-            wordset_ft, L_DIM, use_bias=True, use_bn=False, use_ln=True,
+            wordset_ft, L_DIM * 2, use_bias=True, use_bn=False, use_ln=True,
             activation_fn=tf.nn.relu, is_training=self.is_train,
             scope='q_linear_l')
-
-        v_joint = modules.fc_layer(
-            v_linear_l, L_DIM * 2,
-            use_bias=True, use_bn=False, use_ln=True,
-            activation_fn=tf.nn.relu, is_training=self.is_train, scope='joint_v')
-        v_joint = tf.nn.dropout(v_joint, 0.5)
-
-        l_joint = modules.fc_layer(
-            l_linear_l, L_DIM * 2,
-            use_bias=True, use_bn=False, use_ln=True,
-            activation_fn=tf.nn.relu, is_training=self.is_train, scope='joint_l')
-        l_joint = tf.nn.dropout(l_joint, 0.5)
+        l_linear_l = tf.nn.dropout(l_linear_l, 0.5)
 
         v_logit = modules.fc_layer(
-            v_joint, self.num_answer,
+            v_linear_l, self.num_answer,
             use_bias=True, use_bn=False, use_ln=False,
             activation_fn=None, is_training=self.is_train, scope='classifier_v')
 
         l_logit = modules.fc_layer(
-            l_joint, self.num_answer,
+            l_linear_l, self.num_answer,
             use_bias=True, use_bn=False, use_ln=False,
             activation_fn=None, is_training=self.is_train, scope='classifier_l')
 
@@ -245,34 +235,24 @@ class Model(object):
             activation_fn=tf.tanh, is_training=self.is_train, scope='wordset_ft')
 
         v_linear_l = modules.fc_layer(
-            pooled_V_ft, L_DIM, use_bias=True, use_bn=False, use_ln=True,
+            pooled_V_ft, L_DIM * 2, use_bias=True, use_bn=False, use_ln=True,
             activation_fn=tf.nn.relu, is_training=self.is_train,
             scope='pooled_linear_l')
+        v_linear_l = tf.nn.dropout(v_linear_l, 0.5)
 
         l_linear_l = modules.fc_layer(
-            wordset_ft, L_DIM, use_bias=True, use_bn=False, use_ln=True,
+            wordset_ft, L_DIM * 2, use_bias=True, use_bn=False, use_ln=True,
             activation_fn=tf.nn.relu, is_training=self.is_train,
             scope='q_linear_l')
-
-        v_joint = modules.fc_layer(
-            v_linear_l, L_DIM * 2,
-            use_bias=True, use_bn=False, use_ln=True,
-            activation_fn=tf.nn.relu, is_training=self.is_train, scope='joint_v')
-        v_joint = tf.nn.dropout(v_joint, 0.5)
-
-        l_joint = modules.fc_layer(
-            l_linear_l, L_DIM * 2,
-            use_bias=True, use_bn=False, use_ln=True,
-            activation_fn=tf.nn.relu, is_training=self.is_train, scope='joint_l')
-        l_joint = tf.nn.dropout(l_joint, 0.5)
+        l_linear_l = tf.nn.dropout(l_linear_l, 0.5)
 
         v_logit = modules.fc_layer(
-            v_joint, self.num_answer,
+            v_linear_l, self.num_answer,
             use_bias=True, use_bn=False, use_ln=False,
             activation_fn=None, is_training=self.is_train, scope='classifier_v')
 
         l_logit = modules.fc_layer(
-            l_joint, self.num_answer,
+            l_linear_l, self.num_answer,
             use_bias=True, use_bn=False, use_ln=False,
             activation_fn=None, is_training=self.is_train, scope='classifier_l')
 
@@ -314,34 +294,24 @@ class Model(object):
             flat_blank_ft, [-1, self.data_cfg.n_obj_bf, L_DIM])
 
         v_linear_l = modules.fc_layer(
-            pooled_V_ft, L_DIM, use_bias=True, use_bn=False, use_ln=True,
+            pooled_V_ft, L_DIM * 2, use_bias=True, use_bn=False, use_ln=True,
             activation_fn=tf.nn.relu, is_training=self.is_train,
             scope='pooled_linear_l')
+        v_linear_l = tf.nn.dropout(v_linear_l, 0.5)
 
         l_linear_l = modules.fc_layer(
-            blank_ft, L_DIM, use_bias=True, use_bn=False, use_ln=True,
+            blank_ft, L_DIM * 2, use_bias=True, use_bn=False, use_ln=True,
             activation_fn=tf.nn.relu, is_training=self.is_train,
             scope='q_linear_l')
-
-        v_joint = modules.fc_layer(
-            v_linear_l, L_DIM * 2,
-            use_bias=True, use_bn=False, use_ln=True,
-            activation_fn=tf.nn.relu, is_training=self.is_train, scope='joint_v')
-        v_joint = tf.nn.dropout(v_joint, 0.5)
-
-        l_joint = modules.fc_layer(
-            l_linear_l, L_DIM * 2,
-            use_bias=True, use_bn=False, use_ln=True,
-            activation_fn=tf.nn.relu, is_training=self.is_train, scope='joint_l')
-        l_joint = tf.nn.dropout(l_joint, 0.5)
+        l_linear_l = tf.nn.dropout(l_linear_l, 0.5)
 
         v_logit = modules.fc_layer(
-            v_joint, self.num_answer,
+            v_linear_l, self.num_answer,
             use_bias=True, use_bn=False, use_ln=False,
             activation_fn=None, is_training=self.is_train, scope='classifier_v')
 
         l_logit = modules.fc_layer(
-            l_joint, self.num_answer,
+            l_linear_l, self.num_answer,
             use_bias=True, use_bn=False, use_ln=False,
             activation_fn=None, is_training=self.is_train, scope='classifier_l')
 
@@ -380,34 +350,24 @@ class Model(object):
             flat_blank_ft, [-1, self.data_cfg.n_attr_bf, L_DIM])
 
         v_linear_l = modules.fc_layer(
-            pooled_V_ft, L_DIM, use_bias=True, use_bn=False, use_ln=True,
+            pooled_V_ft, L_DIM * 2, use_bias=True, use_bn=False, use_ln=True,
             activation_fn=tf.nn.relu, is_training=self.is_train,
             scope='pooled_linear_l')
+        v_linear_l = tf.nn.dropout(v_linear_l, 0.5)
 
         l_linear_l = modules.fc_layer(
-            blank_ft, L_DIM, use_bias=True, use_bn=False, use_ln=True,
+            blank_ft, L_DIM * 2, use_bias=True, use_bn=False, use_ln=True,
             activation_fn=tf.nn.relu, is_training=self.is_train,
             scope='q_linear_l')
-
-        v_joint = modules.fc_layer(
-            v_linear_l, L_DIM * 2,
-            use_bias=True, use_bn=False, use_ln=True,
-            activation_fn=tf.nn.relu, is_training=self.is_train, scope='joint_v')
-        v_joint = tf.nn.dropout(v_joint, 0.5)
-
-        l_joint = modules.fc_layer(
-            l_linear_l, L_DIM * 2,
-            use_bias=True, use_bn=False, use_ln=True,
-            activation_fn=tf.nn.relu, is_training=self.is_train, scope='joint_l')
-        l_joint = tf.nn.dropout(l_joint, 0.5)
+        l_linear_l = tf.nn.dropout(l_linear_l, 0.5)
 
         v_logit = modules.fc_layer(
-            v_joint, self.num_answer,
+            v_linear_l, self.num_answer,
             use_bias=True, use_bn=False, use_ln=False,
             activation_fn=None, is_training=self.is_train, scope='classifier_v')
 
         l_logit = modules.fc_layer(
-            l_joint, self.num_answer,
+            l_linear_l, self.num_answer,
             use_bias=True, use_bn=False, use_ln=False,
             activation_fn=None, is_training=self.is_train, scope='classifier_l')
 
