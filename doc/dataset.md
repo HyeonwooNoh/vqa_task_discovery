@@ -81,6 +81,7 @@ python data/tools/visualgenome/generator_memft.py
 Our code preload all bottomup-attention features for whole dataset into ram to minimize overhead for reading feature from HDD or SDD. This approach increases the training speed significantly because reading a large features is the important bottleneck for the training speed.
 To support the preloading features, we should construct new feature files consisting of used images only. The following script will construct the new files.
 ```bash
+# Run the script in root directory /
 python data/tools/visualgenome/sample_bottomup_vfeat_for_memft.py
 ```
 The script will create two features for training set and validation set separately in the directory (memft_all_new_vocab50_obj3000_attr1000_maxlen10).
@@ -93,6 +94,43 @@ val_vfeat.hdf5  # visual features for visual genome validation set
 
 For unsupervised task discovery, WordNet should be preprocessed to create word sets that are used for sampling task specifications. Use the following script to preprocess WordNet
 ```bash
+# Run the script in root directory /
 python data/tools/visualgenome/find_word_group.py --expand_depth=False
 ```
 The script should create the ```wordset_dict5_depth0.pkl``` file in ```memft_all_new_vocab50_obj3000_attr1000_maxlen10``` directory.
+
+## Preprocessing VQA
+
+### VQA with Out-of-vocabulary Answers
+
+VQA with out-of-vocabulary answers split can be downloaded from the [[link](http://cvlab.postech.ac.kr/~hyeonwoonoh/research/vqa_task_discovery/preprocessed/vqa_v2/qa_split_objattr_answer_3div4_genome_memft_check_all_answer_thres1_50000_thres2_-1.tar.gz)].
+
+* *Download link for the VQA with out-of-vocabulary answers split [[link](http://cvlab.postech.ac.kr/~hyeonwoonoh/research/vqa_task_discovery/preprocessed/vqa_v2/qa_split_objattr_answer_3div4_genome_memft_check_all_answer_thres1_50000_thres2_-1.tar.gz)]*
+
+
+Extract the file to a path
+```bash
+data/preprocessed/vqa_v2qa_split_objattr_answer_3div4_genome_memft_check_all_answer_thres1_50000_thres2_-1
+```
+The directory should include the following files
+```bash
+answer_dict.pkl  # dictionary for VQA answers
+vocab.pkl  # dictionary for all words appearing in VQA
+attribute_list.pkl  # list of attribute words in VQA answers
+object_list.pkl  # list of object words in VQA answers
+merged_annotations.pkl  # VQA annotations combining both original training and validation set
+obj_attrs_split.pkl  # Split of object and attribute words for training and testing.
+qa_split.pkl  # Split of question answer pairs, which is constructed based on obj_attrs_split.pkl
+pure_test_qid2anno.pkl  # pure test qids and their annotations for the final evaluation.
+used_image_path.txt  # Path to mscoco image used for learning or evaluation
+```
+
+If you want to understand how this split is created, refer to following scripts. The out-of-vocabulary answers split is created as follows.
+```bash
+# Run the script in root directory /
+python data/tools/vqa_v2/qa_split_objattr_answer_memft_genome.py  # Create out-of-vocabulary split
+python data/tools/vqa_v2/construct_vocab_objattr_memft_genome.py  # Construct vocabulary
+python data/tools/vqa_v2/make_qid2anno_trainval.py
+python data/tools/vqa_v2/make_pure_test_qid2anno.py  # Construct pure test set whose answers are not exposed to training set at all
+```
+Note that we have separate *pure test set*, because VQA usually have 10 different answers for each questions and we need to ensure any of these answers was not exposed during training. The *pure test set* is used for the final evaluation.
