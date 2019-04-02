@@ -16,3 +16,17 @@ In the main paper, we compare with three baselines that should be pretrained. Fo
 * WordNet only: [./scripts/pretrain_wordnet.sh](../scripts/pretrain_wordnet.sh)
 * Description only: [./scripts/pretrain_description.sh](../scripts/pretrain_description.sh)
 * Separable classifier: [./scripts/pretrain_separable.sh](../scripts/pretrain_separable.sh)
+
+## Transfer to VQA
+### Export word weight
+Transferring task conditional visual classifier to VQA requires rearranging the answers because the answer indices for pretraining and VQA are different.
+For rearrangement, use the following script to export word weight.
+```bash
+python pretrain/export_word_weights.py --checkpoint {$CHECKPOINT_PATH}
+```
+This script will export word weight from pretrained task conditional visual classifier, which is then rearranged by VQA training script.
+The CHECKPOINT_PATH should be path to model checkpointed at some iteration. e.g. ```CHECKPOINT_PATH=train_dir/proposed_expand_depth_bs512_lr0.001_dpFalse_seed234/model-4801```
+Following script will export word weight of proposed model with seed=234 after 4801 iterations.
+```bash
+python pretrain/export_word_weights.py --checkpoint train_dir/proposed_expand_depth_bs512_lr0.001_dpFalse_seed234/model-4801
+```
