@@ -30,6 +30,10 @@ Following script will export word weight of proposed model with seed=234 after 4
 ```bash
 python pretrain/export_word_weights.py --checkpoint train_dir/proposed_expand_depth_bs512_lr0.001_dpFalse_seed234/model-4801
 ```
+In case of separable classifier model, different script should be used because parameters for this model is defined differently.
+```bash
+python pretrain/export_word_weights_model_separable.py --checkpoint {$CHECKPOINT_PATH}
+```
 ### Training for VQA
 Use the following script for learning VQA model.
 ```bash
