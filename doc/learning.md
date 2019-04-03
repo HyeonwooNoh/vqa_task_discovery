@@ -43,3 +43,10 @@ Example script:
 ```bash
 python vqa/trainer.py --model_type proposed --pretrained_param_path train_dir/proposed_expand_depth_bs512_lr0.001_dpFalse_seed234/model-4801 --pretrain_word_weight_dir train_dir/proposed_expand_depth_bs512_lr0.001_dpFalse_seed234/word_weights_model-4801 --prefix pretrainseed234 --seed 234
 ```
+### Evaluation for VQA
+```bash
+python vqa/eval_multiple_model.py --train_dirs ${LIST_OF_TRAIN_DIR}
+```
+```bash
+python vqa/eval_collection.py --train_dirs ${LIST_OF_TRAIN_DIR}
+```
