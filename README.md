@@ -4,7 +4,7 @@ Hyeonwoo Noh, Taehoon Kim, Jonghwan Mun, Bohyung Han
 <img src='images/zeroshot_setting.png'>
 </div>
 
-This is official source code for the paper entitled *Transfer Learning via Unsupervised Task Discovery for Visual Question Answering*, which proposes an algorithm for exploiting off-the-shelf visual data such as bounding box annotations or region descriptions for VQA with out-of-vocabulary answers.
+This is official source code for the paper entitled **Transfer Learning via Unsupervised Task Discovery for Visual Question Answering**, which proposes an algorithm for exploiting off-the-shelf visual data such as bounding box annotations or region descriptions for VQA with out-of-vocabulary answers.
 This repository includes all information reproducing results presented in the paper. It includes dataset, model, hyper parameters and plotting results.
 
 If you find this open source release useful, please reference in your paper:
