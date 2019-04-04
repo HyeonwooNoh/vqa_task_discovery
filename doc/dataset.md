@@ -150,10 +150,10 @@ The training script uses tf_record for loading annotations such as image id, bou
 The tf_record files are generated with the script
 ```bash
 # Run the script in root directory /
-python data/tools/vqa_v2/generator_tf_record_memft_genome.py
+python data/tools/vqa_v2/generator_tf_record_memft_genome.py --qa_split_dir ${QA_SPLIT_DIR}
 ```
 To preload all visual features at once, following script is used for preprocessing bottomup-attention features.
 ```bash
 # Run the script in root directory /
-python data/tools/vqa_v2/process_bottom_up_attention_36_memft_genome.py
+python data/tools/vqa_v2/process_bottom_up_attention_36_memft_genome.py --tf_record_memft_dir ${QA_SPLIT_DIR}/tf_record_memft
 ```
