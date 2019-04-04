@@ -135,6 +135,16 @@ python data/tools/vqa_v2/make_pure_test_qid2anno.py  # Construct pure test set w
 ```
 Note that we have separate *pure test set*, because VQA usually have 10 different answers for each questions and we need to ensure any of these answers was not exposed during training. The *pure test set* is used for the final evaluation.
 
+### VQA with both Out-of-vocabulary Answers and Learned Answers
+If you want to understand how this split is created, refer to following scripts. The out-of-vocabulary answers split is created as follows.
+```bash
+# Run the script in root directory /
+python data/tools/vqa_v2/qa_split_objattr_answer_memft_genome_seen_answer_in_test.py   # Create split
+python data/tools/vqa_v2/construct_vocab_objattr_memft_genome.py --qa_split_dir data/preprocessed/vqa_v2/qa_split_objattr_answer_3div4_genome_memft_check_all_answer_thres1_50000_thres2_-1_with_seen_answer_in_test  # Construct vocabulary
+python data/tools/vqa_v2/make_qid2anno_trainval.py  # If you have never run this script before
+python data/tools/vqa_v2/make_test_qid2anno_seen_answer_in_test.py  # Construct annotations for the final evaluation
+```
+
 ### Preprocessing for learning and evaluation
 The training script uses tf_record for loading annotations such as image id, bounding boxes and descriptions during while running the script, and uses separate visual feature file to preload all visual feature before running the script.
 The tf_record files are generated with the script
