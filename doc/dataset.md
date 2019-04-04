@@ -136,6 +136,29 @@ python data/tools/vqa_v2/make_pure_test_qid2anno.py  # Construct pure test set w
 Note that we have separate *pure test set*, because VQA usually have 10 different answers for each questions and we need to ensure any of these answers was not exposed during training. The *pure test set* is used for the final evaluation.
 
 ### VQA with both Out-of-vocabulary Answers and Learned Answers
+
+VQA with out-of-vocabulary answers and learned answers split can be downloaded from the [[link](http://cvlab.postech.ac.kr/~hyeonwoonoh/research/vqa_task_discovery/preprocessed/vqa_v2/qa_split_objattr_answer_3div4_genome_memft_check_all_answer_thres1_50000_thres2_-1_with_seen_answer_in_test.tar.gz)].
+
+* *Download link for the VQA with out-of-vocabulary answers and learned answers split [[link](http://cvlab.postech.ac.kr/~hyeonwoonoh/research/vqa_task_discovery/preprocessed/vqa_v2/qa_split_objattr_answer_3div4_genome_memft_check_all_answer_thres1_50000_thres2_-1_with_seen_answer_in_test.tar.gz)]*
+
+Extract the file to a path
+```bash
+data/preprocessed/vqa_v2qa_split_objattr_answer_3div4_genome_memft_check_all_answer_thres1_50000_thres2_-1
+```
+The directory should include the following files
+```bash
+answer_dict.pkl  # dictionary for VQA answers
+vocab.pkl  # dictionary for all words appearing in VQA
+attribute_list.pkl  # list of attribute words in VQA answers
+object_list.pkl  # list of object words in VQA answers
+merged_annotations.pkl  # VQA annotations combining both original training and validation set
+obj_attrs_split.pkl  # Split of object and attribute words for training and testing.
+qa_split.pkl  # Split of question answer pairs, which is constructed based on obj_attrs_split.pkl
+test_detail_split.pkl  # annotation for each test questions whether answer contains answer from training visual concept or not.
+test_qid2anno.pkl  # qid2anno for only test set questions
+used_image_path.txt  # Path to mscoco image used for learning or evaluation
+```
+
 If you want to understand how this split is created, refer to following scripts. The out-of-vocabulary answers split is created as follows.
 ```bash
 # Run the script in root directory /
