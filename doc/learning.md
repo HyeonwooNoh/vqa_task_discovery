@@ -17,6 +17,12 @@ In the main paper, we compare with three baselines that should be pretrained. Fo
 * Description only: [./scripts/pretrain_description.sh](../scripts/pretrain_description.sh)
 * Separable classifier: [./scripts/pretrain_separable_classifier.sh](../scripts/pretrain_separable_classifier.sh)
 
+### Downloading pretrained parameters
+If you want to skip pretraining step, you can simply download pretrained files from this [[link](http://cvlab.postech.ac.kr/~hyeonwoonoh/research/vqa_task_discovery/pretrained_params.tar.gz)].
+* *Download link for pretrained parameters [[link](http://cvlab.postech.ac.kr/~hyeonwoonoh/research/vqa_task_discovery/pretrained_params.tar.gz)]*
+
+Download the file and extract it to ```train_dir```.
+
 ## Transfer to VQA
 ### Export word weight
 Transferring task conditional visual classifier to VQA requires rearranging the answers because the answer indices for pretraining and VQA are different.
